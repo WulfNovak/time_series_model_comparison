@@ -16,10 +16,11 @@ def general_scale(data, target_variable = np.nan, alpha = 0.05):
 
     Returns:
     Statement of variables that have been standardized or normalized,
-    list of non-numeric vars, and resulting data
+    list of non-numeric vars, and resulting data.
+    Sets rescale_object to global environment if target_variable is specified.
     """
-    
-    global rescale_object_global
+
+    global rescale_object
 
     # Separate numeric and non-numeric columns
     numeric = data.select_dtypes(include = np.number)
@@ -61,11 +62,17 @@ def general_scale(data, target_variable = np.nan, alpha = 0.05):
 
     # Set rescale_object to global environment if target_variable is specified
     if target_variable != np.nan and target_variable in standardize:
-        rescale_object = tuple([data[target_variable].mean(), data[target_variable].std(), "standardized"])
+        rescale_object = tuple([data[target_variable].mean(), 
+                                data[target_variable].std(), 
+                                "standardized"])
+        
         print('\n', "Note: 'rescale_object' added to global environment for rescale function.", sep = "")
 
     elif target_variable != np.nan and target_variable in normalize:
-        rescale_object = tuple([min(data[target_variable]), max(data[target_variable]), "normalized"])
+        rescale_object = tuple([min(data[target_variable]), 
+                                max(data[target_variable]), 
+                                "normalized"])
+        
         print('\n', "Note: 'rescale_object' added to global environment for rescale function.", sep = "")
         
     return data
