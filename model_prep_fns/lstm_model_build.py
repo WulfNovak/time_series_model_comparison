@@ -24,7 +24,7 @@ def lstm_model_build( x_train, y_train, model_type, window_size):
     Other thoughts / future notes:
     Create function for min and max units based on number of features (ex: 4x features = min nodes, 8x features = max nodes)
     # Think of possible warnings or errors that could be raised
-        # Neural Net is too large for backpropogation, use backtesting
+        # Neural Net is too large for backpropogation, use batch size
     # continue to refine actual params within this function. 
     """
     if model_type == 'base':
