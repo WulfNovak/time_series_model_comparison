@@ -24,7 +24,8 @@ def lstm_model_build( x_train, y_train, model_type, window_size):
     Other thoughts / future notes:
     Create function for min and max units based on number of features (ex: 4x features = min nodes, 8x features = max nodes)
     # Think of possible warnings or errors that could be raised
-        # Neural Net is too large for backpropogation, use batch size
+    # Neural Net is too large for backpropogation, use batch size
+
     # continue to refine actual params within this function. 
     """
     if model_type == 'base':
@@ -39,13 +40,13 @@ def lstm_model_build( x_train, y_train, model_type, window_size):
     elif model_type == 'stacked':
         lstm = tf.keras.Sequential() 
         lstm.add(tf.keras.layers.LSTM(
-            hp.Choice('units', [128, 182]), 
+            hp.Choice('units_1', [128, 182]), 
             activation='relu', 
             input_shape=(window_size, x_train_1.shape[1]),
             return_sequences=True))
         lstm.add(tf.keras.layers.Dropout(.2)) 
         lstm.add(tf.keras.layers.LSTM( 
-            hp.Choice('units', [128, 182]), 
+            hp.Choice('units_2', [128, 182]), 
             activation='relu')) 
         lstm.add(tf.keras.layers.Dropout(.2)) 
         lstm.add(tf.keras.layers.Dense(1))
